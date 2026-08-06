@@ -1,0 +1,284 @@
+.page {
+  display: grid;
+  gap: 1rem;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+}
+
+.intro p {
+  margin: 0.35rem 0 0;
+  color: var(--color-muted);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: end;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.controls label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  min-width: 180px;
+}
+
+.controls select {
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+  background: var(--color-surface-low);
+  color: var(--color-text);
+}
+
+.metricField {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: min(100%, 360px);
+  flex: 1;
+}
+
+.metricField legend {
+  padding: 0;
+  margin-bottom: 0.35rem;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.metricTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.metricBtn,
+.metricActive {
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-low);
+  color: var(--color-muted);
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+  font-weight: 600;
+}
+
+.metricBtn span,
+.metricActive span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.metricActive {
+  background: var(--color-primary-container);
+  border-color: transparent;
+  color: var(--color-on-primary-container);
+}
+
+.compareBtn {
+  border: none;
+  border-radius: 10px;
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  font: inherit;
+  font-weight: 700;
+  padding: 0.7rem 1.15rem;
+  cursor: pointer;
+}
+
+.compareBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.districtPicker {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  box-shadow: var(--shadow);
+}
+
+.pickerHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hint {
+  margin: 0 0 0.7rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.5rem;
+}
+
+.checkItem {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  font-size: 0.92rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  background: var(--color-surface-low);
+  cursor: pointer;
+}
+
+.checked {
+  border-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-border));
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.insightHigh,
+.insightLow {
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  display: grid;
+  gap: 0.2rem;
+  box-shadow: var(--shadow);
+}
+
+.insightHigh {
+  border-left: 4px solid #0e8a6c;
+}
+
+.insightLow {
+  border-left: 4px solid #0061a5;
+}
+
+.insightLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.chartCard,
+.tableCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 1rem 1.1rem 1.15rem;
+  box-shadow: var(--shadow);
+}
+
+.chartHead h2,
+.tableCard h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.chartHead p,
+.muted {
+  margin: 0.3rem 0 0.85rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.chartWrap {
+  width: 100%;
+  min-height: 300px;
+}
+
+.legendList {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+.legendList li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legendList span {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.65rem 0.45rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.92rem;
+}
+
+td:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.tableDot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .compareBtn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+/* Day mode — from design mock ("Çanakkale" light dashboard) */
+:root,
+html[data-theme='day'] {
+  --color-bg: #f8f9ff;
+  --color-surface: #ffffff;
+  --color-surface-low: #eaeef7;
+  --color-text: #171c22;
+  --color-muted: #3f4753;
+  --color-accent: #0061a5;
+  --color-accent-strong: #00497e;
+  --color-accent-soft: #d2e4ff;
+  --color-on-accent: #ffffff;
+  --color-primary-container: #0099ff;
+  --color-on-primary-container: #002f54;
+  --color-tertiary: #006875;
+  --color-border: rgba(112, 120, 132, 0.35);
+  --color-error: #ba1a1a;
+  --color-sidebar: #ffffff;
+  --color-header: rgba(255, 255, 255, 0.92);
+  --hero-scrim: linear-gradient(
+    90deg,
+    rgba(248, 249, 255, 0.96) 0%,
+    rgba(248, 249, 255, 0.78) 45%,
+    transparent 100%
+  );
+  --shadow: 0 12px 30px rgba(23, 28, 34, 0.08);
+  --font-sans: 'Inter', 'Segoe UI', sans-serif;
+  --font-display: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --radius: 12px;
+  --sidebar-width: 280px;
+  --header-height: 80px;
+}
+
+/* Night mode — from design mock */
+html[data-theme='night'] {
+  --color-bg: #0a0f1e;
+  --color-surface: #161c2d;
+  --color-surface-low: #1e293b;
+  --color-text: #f8fafc;
+  --color-muted: #cbd5e1;
+  --color-accent: #9fcaff;
+  --color-accent-strong: #6aa8e8;
+  --color-accent-soft: rgba(159, 202, 255, 0.12);
+  --color-on-accent: #00325b;
+  --color-primary-container: #0061a5;
+  --color-on-primary-container: #ffffff;
+  --color-tertiary: #4fd8eb;
+  --color-border: rgba(71, 85, 105, 0.45);
+  --color-error: #ff5449;
+  --color-sidebar: #161c2d;
+  --color-header: rgba(22, 28, 45, 0.9);
+  --hero-scrim: linear-gradient(
+    90deg,
+    rgba(10, 15, 30, 0.95) 0%,
+    rgba(10, 15, 30, 0.8) 45%,
+    transparent 100%
+  );
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+select,
+input,
+textarea {
+  font: inherit;
+}
+
+button:focus-visible,
+select:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.35rem;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

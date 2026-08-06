@@ -1,0 +1,90 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1rem 1.1rem 1.1rem;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 0.35rem;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.name a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.status {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.temp {
+  margin: 0.35rem 0 0;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+
+.feels {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.meta {
+  margin: 0.55rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.meta dt {
+  margin: 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+}
+
+.meta dd {
+  margin: 0.1rem 0 0;
+  font-weight: 600;
+}
+
+.description {
+  margin: 0.35rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.updated {
+  margin: 0.45rem 0 0;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}

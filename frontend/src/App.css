@@ -1,0 +1,53 @@
+.shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+.brand {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  letter-spacing: -0.02em;
+  color: var(--color-accent);
+}
+
+.tagline {
+  margin: 0 0 1.5rem;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}
+
+.panel {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.5rem;
+}
+
+.panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.panel ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--color-muted);
+}
+
+.panel li + li {
+  margin-top: 0.35rem;
+}
+
+.note {
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+  color: var(--color-muted);
+}
+
+.note code {
+  font-size: 0.9em;
+  background: var(--color-accent-soft);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}

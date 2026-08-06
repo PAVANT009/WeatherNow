@@ -1,0 +1,33 @@
+.panel {
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.title {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.message {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.info {
+  border-left: 4px solid var(--color-accent);
+}
+
+.empty {
+  border-left: 4px solid var(--color-muted);
+}
+
+.error {
+  border-left: 4px solid var(--color-error);
+}
+
+.error .title {
+  color: var(--color-error);
+}
