@@ -6,7 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import text
 
-from app.db.seed import seed_canakkale
+from app.db.seed import seed_all_indian_cities, seed_bengaluru
 from app.db.session import SessionLocal, engine
 from app.main import app
 
@@ -41,12 +41,18 @@ def client(database_ready: None) -> Generator[TestClient, None, None]:
 
 
 @pytest.fixture()
-def seeded_canakkale(database_ready: None) -> dict[str, int]:
-    """Ensure Çanakkale seed exists; return city id and first district id."""
+def seeded_city(database_ready: None) -> dict[str, int]:
+    """Ensure Indian cities seed exists; return Bengaluru city id and first locality id."""
     db = SessionLocal()
     try:
-        city = seed_canakkale(db)
+        city = seed_bengaluru(db)
         district_id = city.districts[0].id
         return {"city_id": city.id, "district_id": district_id}
     finally:
         db.close()
+
+
+@pytest.fixture()
+def seeded_canakkale(seeded_city: dict[str, int]) -> dict[str, int]:
+    """Backward-compatible fixture alias."""
+    return seeded_city

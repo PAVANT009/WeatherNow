@@ -1,45 +1,21 @@
-"""WMO weather code → kullanıcı dostu Türkçe durum/açıklama.
-
-Open-Meteo, WMO Weather interpretation codes kullanır:
-https://open-meteo.com/en/docs
-"""
+"""English labels for Open-Meteo WMO weather interpretation codes."""
 
 from __future__ import annotations
 
 
 def describe_weather_code(code: int) -> tuple[str, str]:
-    """Return ``(status, description)`` for a WMO weather code.
-
-    Bilinmeyen kodlarda güvenli bir varsayılan döner.
-    """
+    """Return an English ``(status, description)`` pair for a WMO code."""
     mapping: dict[int, tuple[str, str]] = {
-        0: ("Açık", "Gökyüzü açık"),
-        1: ("Çoğunlukla açık", "Çoğunlukla açık hava"),
-        2: ("Parçalı bulutlu", "Parçalı bulutlu"),
-        3: ("Kapalı", "Bulutlu / kapalı gökyüzü"),
-        45: ("Sisli", "Sis"),
-        48: ("Sisli", "Kırağılı sis"),
-        51: ("Çisenti", "Hafif çisenti"),
-        53: ("Çisenti", "Orta şiddette çisenti"),
-        55: ("Çisenti", "Yoğun çisenti"),
-        56: ("Dondurucu çisenti", "Hafif dondurucu çisenti"),
-        57: ("Dondurucu çisenti", "Yoğun dondurucu çisenti"),
-        61: ("Yağmurlu", "Hafif yağmur"),
-        63: ("Yağmurlu", "Orta şiddette yağmur"),
-        65: ("Yağmurlu", "Şiddetli yağmur"),
-        66: ("Dondurucu yağmur", "Hafif dondurucu yağmur"),
-        67: ("Dondurucu yağmur", "Şiddetli dondurucu yağmur"),
-        71: ("Karlı", "Hafif kar"),
-        73: ("Karlı", "Orta şiddette kar"),
-        75: ("Karlı", "Şiddetli kar"),
-        77: ("Kar taneleri", "Kar taneleri"),
-        80: ("Sağanak", "Hafif sağanak yağış"),
-        81: ("Sağanak", "Orta şiddette sağanak"),
-        82: ("Sağanak", "Şiddetli sağanak"),
-        85: ("Kar sağanağı", "Hafif kar sağanağı"),
-        86: ("Kar sağanağı", "Şiddetli kar sağanağı"),
-        95: ("Fırtınalı", "Gök gürültülü fırtına"),
-        96: ("Fırtınalı", "Hafif dolu ile fırtına"),
-        99: ("Fırtınalı", "Şiddetli dolu ile fırtına"),
+        0: ("Clear", "Clear sky"), 1: ("Mostly clear", "Mostly clear sky"),
+        2: ("Partly cloudy", "Partly cloudy"), 3: ("Overcast", "Overcast sky"),
+        45: ("Fog", "Fog"), 48: ("Fog", "Rime fog"),
+        51: ("Drizzle", "Light drizzle"), 53: ("Drizzle", "Moderate drizzle"), 55: ("Drizzle", "Dense drizzle"),
+        56: ("Freezing drizzle", "Light freezing drizzle"), 57: ("Freezing drizzle", "Dense freezing drizzle"),
+        61: ("Rain", "Slight rain"), 63: ("Rain", "Moderate rain"), 65: ("Rain", "Heavy rain"),
+        66: ("Freezing rain", "Light freezing rain"), 67: ("Freezing rain", "Heavy freezing rain"),
+        71: ("Snow", "Slight snow fall"), 73: ("Snow", "Moderate snow fall"), 75: ("Snow", "Heavy snow fall"), 77: ("Snow grains", "Snow grains"),
+        80: ("Showers", "Slight rain showers"), 81: ("Showers", "Moderate rain showers"), 82: ("Showers", "Violent rain showers"),
+        85: ("Snow showers", "Slight snow showers"), 86: ("Snow showers", "Heavy snow showers"),
+        95: ("Thunderstorm", "Thunderstorm"), 96: ("Thunderstorm", "Thunderstorm with slight hail"), 99: ("Thunderstorm", "Thunderstorm with heavy hail"),
     }
-    return mapping.get(code, ("Bilinmiyor", f"WMO weather code {code}"))
+    return mapping.get(code, ("Unknown", f"WMO weather code {code}"))

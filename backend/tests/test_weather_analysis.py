@@ -39,7 +39,7 @@ def _insert_record(
                 feels_like=Decimal(temperature),
                 humidity=humidity,
                 wind_speed=Decimal(wind_speed),
-                weather_status="Açık",
+                weather_status="Clear",
                 weather_description="test",
                 provider="test",
                 observed_at=observed_at,
@@ -93,9 +93,9 @@ def _cleanup_city_weather(city_id: int) -> None:
 
 def test_invalid_date_range_returns_422(
     client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
-    district_id = seeded_canakkale["district_id"]
+    district_id = seeded_city["district_id"]
     start = "2026-08-10T00:00:00+00:00"
     end = "2026-08-01T00:00:00+00:00"
     response = client.get(
@@ -108,7 +108,7 @@ def test_invalid_date_range_returns_422(
 
 def test_compare_invalid_metric_returns_422(
     client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
     db = SessionLocal()
     try:
@@ -117,7 +117,7 @@ def test_compare_invalid_metric_returns_422(
         districts = list(
             db.scalars(
                 select(District).where(
-                    District.city_id == seeded_canakkale["city_id"]
+                    District.city_id == seeded_city["city_id"]
                 )
             ).all()
         )
@@ -135,9 +135,9 @@ def test_compare_invalid_metric_returns_422(
 
 def test_summary_and_current(
     client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
-    city_id = seeded_canakkale["city_id"]
+    city_id = seeded_city["city_id"]
     _cleanup_city_weather(city_id)
 
     db = SessionLocal()

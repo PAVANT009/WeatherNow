@@ -27,7 +27,7 @@ class CityCreate(BaseModel):
     """Request body for creating a city."""
 
     name: str = Field(..., min_length=1, max_length=120)
-    country_code: str = Field(default="TR", min_length=2, max_length=2)
+    country_code: str = Field(default="IN", min_length=2, max_length=2)
     latitude: Optional[Decimal] = None
     longitude: Optional[Decimal] = None
 

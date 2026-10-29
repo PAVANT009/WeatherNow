@@ -11,8 +11,8 @@ from sqlalchemy import inspect, select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from app.db.seed import seed_canakkale
-from app.db.seed_data import CANAKKALE_SEED
+from app.db.seed import seed_bengaluru
+from app.db.seed_data import BENGALURU_SEED
 from app.db.session import SessionLocal, engine
 from app.models import City, District, WeatherRecord
 
@@ -62,32 +62,32 @@ def test_expected_tables_exist() -> None:
     assert {"cities", "districts", "weather_records", "alembic_version"} <= table_names
 
 
-def test_seed_canakkale_creates_districts(db: Session) -> None:
-    city = seed_canakkale(db)
-    assert city.name == "Çanakkale"
-    assert city.country_code == "TR"
-    assert len(city.districts) == len(CANAKKALE_SEED["districts"])
+def test_seed_bengaluru_creates_districts(db: Session) -> None:
+    city = seed_bengaluru(db)
+    assert city.name == "Bengaluru"
+    assert city.country_code == "IN"
+    assert len(city.districts) == len(BENGALURU_SEED["districts"])
 
     district_names = {district.name for district in city.districts}
-    expected_names = {item["name"] for item in CANAKKALE_SEED["districts"]}
+    expected_names = {item["name"] for item in BENGALURU_SEED["districts"]}
     assert district_names == expected_names
 
-    # Idempotent seed: ikinci çağrı yeni kayıt üretmemeli
-    again = seed_canakkale(db)
+    # Idempotent seed: second call should not create duplicate records
+    again = seed_bengaluru(db)
     assert again.id == city.id
-    count = db.scalar(select(City).where(City.name == "Çanakkale"))
+    count = db.scalar(select(City).where(City.name == "Bengaluru"))
     assert count is not None
 
 
 def test_city_district_relationship(db: Session) -> None:
-    city = seed_canakkale(db)
+    city = seed_bengaluru(db)
     district = city.districts[0]
     assert district.city.id == city.id
     assert district.city_id == city.id
 
 
 def test_weather_record_links_to_district(db: Session) -> None:
-    city = seed_canakkale(db)
+    city = seed_bengaluru(db)
     district = city.districts[0]
     observed_at = datetime(2026, 8, 3, 12, 0, tzinfo=timezone.utc)
     _delete_weather_at(db, district.id, observed_at)
@@ -115,7 +115,7 @@ def test_weather_record_links_to_district(db: Session) -> None:
 
 
 def test_duplicate_weather_observation_is_rejected(db: Session) -> None:
-    city = seed_canakkale(db)
+    city = seed_bengaluru(db)
     district = city.districts[0]
     observed_at = datetime(2026, 8, 3, 15, 0, tzinfo=timezone.utc)
     _delete_weather_at(db, district.id, observed_at)
@@ -144,7 +144,7 @@ def test_duplicate_weather_observation_is_rejected(db: Session) -> None:
 
 
 def test_cannot_delete_city_with_districts(db: Session) -> None:
-    city = seed_canakkale(db)
+    city = seed_bengaluru(db)
     db.delete(city)
     with pytest.raises(IntegrityError):
         db.commit()

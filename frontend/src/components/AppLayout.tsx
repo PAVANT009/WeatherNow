@@ -49,7 +49,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <div className={styles.shell}>
-      <aside className={styles.sidebar} aria-label="Ana gezinti">
+      <aside className={styles.sidebar} aria-label="Main navigation">
         <div className={styles.brandRow}>
           <span className={`material-symbols-outlined ${styles.brandIcon}`}>
             partly_cloudy_day
@@ -96,8 +96,8 @@ export function AppLayout({ children }: AppLayoutProps) {
               onClick={toggleTheme}
               aria-label={
                 theme === 'night'
-                  ? 'Gündüz moduna geç'
-                  : 'Gece moduna geç'
+                  ? 'Switch to day mode'
+                  : 'Switch to night mode'
               }
               title={theme === 'night' ? 'Day mode' : 'Night mode'}
             >

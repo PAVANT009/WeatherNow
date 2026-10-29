@@ -29,7 +29,7 @@ class City(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
-    country_code: Mapped[str] = mapped_column(String(2), nullable=False, default="TR")
+    country_code: Mapped[str] = mapped_column(String(2), nullable=False, default="IN")
     latitude: Mapped[Optional[Decimal]] = mapped_column(Numeric(10, 7), nullable=True)
     longitude: Mapped[Optional[Decimal]] = mapped_column(Numeric(10, 7), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
@@ -38,7 +38,7 @@ class City(Base):
         nullable=False,
     )
 
-    # RESTRICT: şehir silinince ilçeler otomatik silinmez; önce ilçeler temizlenmeli.
+    # RESTRICT: deleting a city does not automatically delete districts; delete districts first.
     districts: Mapped[list["District"]] = relationship(
         back_populates="city",
         cascade="save-update",
@@ -70,7 +70,7 @@ class District(Base):
     )
 
     city: Mapped["City"] = relationship(back_populates="districts")
-    # RESTRICT: ilçe silinince geçmiş hava kayıtları otomatik silinmez.
+    # RESTRICT: deleting a district does not automatically delete past weather records.
     weather_records: Mapped[list["WeatherRecord"]] = relationship(
         back_populates="district",
         cascade="save-update",

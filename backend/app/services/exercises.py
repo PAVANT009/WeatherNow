@@ -14,8 +14,8 @@ from app.schemas.exercises import (
 def get_seventh_element(values: list[float]) -> SeventhElementResponse:
     """Return the 7th element using 0-based indexing.
 
-    İnsanlar "7. eleman" derken 1'den sayar (pozisyon = 7).
-    Python listelerinde indeks 0'dan başlar; bu yüzden 7. eleman ``values[6]``.
+    Humans count the "7th item" starting from 1 (position = 7).
+    In Python lists, 0-based indexing means the 7th item is at index 6 (``values[6]``).
     """
     return SeventhElementResponse(
         value=values[6],

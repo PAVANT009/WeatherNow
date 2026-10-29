@@ -22,18 +22,18 @@ router = APIRouter(prefix="/exercises", tags=["exercises"])
 
 @router.post("/seventh-element", response_model=SeventhElementResponse)
 def seventh_element(payload: SeventhElementRequest) -> SeventhElementResponse:
-    """Listenin 7. elemanını döndürür.
+    """Return the 7th element of the list.
 
-    Kurallar:
-    - Listede en az 7 eleman olmalı (aksi halde Pydantic 422 verir).
-    - Python indeksleri 0'dan başladığı için 7. elemanın indeksi 6'dır.
+    Rules:
+    - List must contain at least 7 elements (otherwise Pydantic returns 422).
+    - Because Python uses 0-based indexing, the 7th element has index 6.
     """
     return exercises_service.get_seventh_element(payload.values)
 
 
 @router.post("/statistics", response_model=StatisticsResponse)
 def statistics(payload: NumberListRequest) -> StatisticsResponse:
-    """Gönderilen sayı dizisi için min, max, toplam, ortalama ve eleman sayısı."""
+    """Compute min, max, sum, average, and count for the supplied number list."""
     return exercises_service.compute_statistics(payload.values)
 
 
@@ -42,9 +42,9 @@ def filter_values(
     payload: NumberListRequest,
     minimum: float = Query(
         ...,
-        description="Bu değerden küçük olanlar elenir (>= minimum kalır)",
+        description="Values smaller than this are filtered out (>= minimum are kept)",
         examples=[20],
     ),
 ) -> FilterResponse:
-    """Query parametresindeki minimum değere göre listeyi filtreler."""
+    """Filter list based on the minimum query parameter threshold."""
     return exercises_service.filter_by_minimum(payload.values, minimum)

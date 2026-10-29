@@ -20,16 +20,16 @@ def test_health_ok(client: TestClient) -> None:
     assert response.json() == {"status": "ok", "database": "connected"}
 
 
-def test_list_cities_includes_canakkale(
+def test_list_cities_includes_bengaluru(
     client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
     response = client.get("/api/v1/cities")
     assert response.status_code == 200
     payload = response.json()
     assert isinstance(payload, list)
-    assert any(city["id"] == seeded_canakkale["city_id"] for city in payload)
-    assert any(city["name"] == "Çanakkale" for city in payload)
+    assert any(city["id"] == seeded_city["city_id"] for city in payload)
+    assert any(city["name"] == "Bengaluru" for city in payload)
 
 
 def test_get_city_not_found(client: TestClient) -> None:
@@ -42,19 +42,19 @@ def test_get_city_not_found(client: TestClient) -> None:
 
 def test_list_districts_for_city(
     client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
-    city_id = seeded_canakkale["city_id"]
+    city_id = seeded_city["city_id"]
     response = client.get(f"/api/v1/cities/{city_id}/districts")
     assert response.status_code == 200
     payload = response.json()
     assert isinstance(payload, list)
     assert len(payload) >= 12
     names = {item["name"] for item in payload}
-    assert "Merkez" in names
-    assert "Biga" in names
-    assert "Gökçeada" in names
-    assert "Bozcaada" in names
+    assert "Koramangala" in names
+    assert "Indiranagar" in names
+    assert "Whitefield" in names
+    assert "HSR Layout" in names
     assert all(item["city_id"] == city_id for item in payload)
 
 
@@ -80,9 +80,9 @@ def test_create_city_and_district_then_cleanup(client: TestClient) -> None:
         "/api/v1/cities",
         json={
             "name": city_name,
-            "country_code": "TR",
-            "latitude": "41.0000000",
-            "longitude": "29.0000000",
+            "country_code": "IN",
+            "latitude": "12.9000000",
+            "longitude": "77.5000000",
         },
     )
     assert create_city.status_code == 201
@@ -95,8 +95,8 @@ def test_create_city_and_district_then_cleanup(client: TestClient) -> None:
         json={
             "city_id": city_id,
             "name": f"TestDistrict-{suffix}",
-            "latitude": "41.0100000",
-            "longitude": "29.0100000",
+            "latitude": "12.9100000",
+            "longitude": "77.5100000",
         },
     )
     assert create_district.status_code == 201
@@ -123,14 +123,17 @@ def test_create_city_and_district_then_cleanup(client: TestClient) -> None:
         db.close()
 
 
-def test_invalid_district_coordinates_return_422(client: TestClient) -> None:
+def test_invalid_district_coordinates_return_422(
+    client: TestClient,
+    seeded_city: dict[str, int],
+) -> None:
     response = client.post(
         "/api/v1/districts",
         json={
-            "city_id": 1,
+            "city_id": seeded_city["city_id"],
             "name": "BadCoords",
             "latitude": "120.0",
-            "longitude": "26.0",
+            "longitude": "77.0",
         },
     )
     assert response.status_code == 422
@@ -138,15 +141,15 @@ def test_invalid_district_coordinates_return_422(client: TestClient) -> None:
 
 def test_empty_district_name_returns_422(
     client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
     response = client.post(
         "/api/v1/districts",
         json={
-            "city_id": seeded_canakkale["city_id"],
+            "city_id": seeded_city["city_id"],
             "name": "   ",
-            "latitude": "40.0",
-            "longitude": "26.0",
+            "latitude": "12.9",
+            "longitude": "77.5",
         },
     )
     assert response.status_code == 422

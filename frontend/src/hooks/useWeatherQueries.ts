@@ -42,7 +42,7 @@ export function useFetchCityWeather(cityId: number | null) {
   return useMutation({
     mutationFn: () => {
       if (cityId == null) {
-        return Promise.reject(new Error('Şehir seçilmedi'))
+        return Promise.reject(new Error('No city selected'))
       }
       return fetchCityWeather(cityId)
     },

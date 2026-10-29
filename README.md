@@ -130,10 +130,11 @@ cd ..\backend
 alembic upgrade head
 ```
 
-### 6. Seed data (Çanakkale + 12 districts)
+### 6. Seed data (Indian cities + localities)
 
-Merkez, Ayvacık, Bayramiç, Biga, Bozcaada, Çan, Eceabat, Ezine, Gelibolu,
-Gökçeada, Lapseki, Yenice:
+Seeds Indian cities (Bengaluru, Mumbai, Delhi, Hyderabad, Chennai) along with their
+prominent localities/districts (e.g. Koramangala, Indiranagar, Whitefield, Bandra,
+Connaught Place, HITEC City, T. Nagar):
 
 ```powershell
 python -m app.db.seed

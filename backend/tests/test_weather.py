@@ -72,8 +72,8 @@ def mock_provider_client(database_ready: None) -> TestClient:
 
 def test_describe_weather_code_known() -> None:
     status, description = describe_weather_code(61)
-    assert status == "Yağmurlu"
-    assert "yağmur" in description.lower()
+    assert status == "Rain"
+    assert "rain" in description.lower()
 
 
 def test_open_meteo_provider_success_parses_json() -> None:
@@ -99,13 +99,13 @@ def test_open_meteo_provider_success_parses_json() -> None:
             client=client,
         )
         observation = provider.fetch_current(
-            latitude=Decimal("40.1553000"),
-            longitude=Decimal("26.4142000"),
+            latitude=Decimal("12.9716000"),
+            longitude=Decimal("77.5946000"),
         )
 
     assert observation.temperature == Decimal("27.4")
     assert observation.humidity == 48
-    assert observation.weather_status == "Parçalı bulutlu"
+    assert observation.weather_status == "Partly cloudy"
     assert observation.observed_at.tzinfo is not None
     assert observation.provider == "open_meteo"
 
@@ -130,9 +130,9 @@ def test_open_meteo_provider_timeout() -> None:
 
 def test_insert_weather_record_and_skip_duplicate(
     client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
-    district_id = seeded_canakkale["district_id"]
+    district_id = seeded_city["district_id"]
     observed_at = datetime(2026, 8, 3, 18, 30, tzinfo=timezone.utc)
     observation = _fixed_observation(observed_at=observed_at)
     fetched_at = datetime.now(timezone.utc)
@@ -174,9 +174,9 @@ def test_insert_weather_record_and_skip_duplicate(
 
 def test_fetch_city_uses_mock_provider(
     mock_provider_client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
-    city_id = seeded_canakkale["city_id"]
+    city_id = seeded_city["city_id"]
     observed_at = datetime(2026, 8, 3, 12, 0, tzinfo=timezone.utc)
     _cleanup_observed_at(observed_at)
 
@@ -192,7 +192,7 @@ def test_fetch_city_uses_mock_provider(
 
 def test_fetch_city_partial_failure(
     client: TestClient,
-    seeded_canakkale: dict[str, int],
+    seeded_city: dict[str, int],
 ) -> None:
     """Some districts succeed while others fail; city batch continues."""
     observed_at = datetime(2026, 8, 3, 13, 0, tzinfo=timezone.utc)
@@ -218,7 +218,7 @@ def test_fetch_city_partial_failure(
     app.dependency_overrides[get_weather_provider_dep] = lambda: provider
     try:
         response = client.post(
-            f"/api/v1/weather/fetch/{seeded_canakkale['city_id']}"
+            f"/api/v1/weather/fetch/{seeded_city['city_id']}"
         )
     finally:
         app.dependency_overrides.pop(get_weather_provider_dep, None)
